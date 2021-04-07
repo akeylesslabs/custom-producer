@@ -62,3 +62,25 @@ producer that is allowed to issue requests to this custom producer. For
 example, if a single API Gateway manages more than a single custom producer, a
 particular Let's Encrypt producer deployment may be limited to only one of
 them. This name should be the full item name, including the leading `/`.
+
+## Usage
+
+This producer accepts the following arguments:
+
+| Field name | Description |
+|-|-|
+| `domain` | Required: Issue Let's Encrypt certificate for this domain. |
+| `use_staging` | Use Let's Encrypt staging environment. Useful during testing or integration to avoid rate limits. |
+
+For example:
+
+```
+akeyless get-dynamic-secret-value \
+    --name /letsencrypt \
+    --profile saml-profile \
+    --args='{"domain":"foo.example.com","use_staging":true}' \
+    --timeout 300
+```
+
+> Please make sure you don't exceed Let's Encrypt [rate
+> limits](https://letsencrypt.org/docs/rate-limits/).
