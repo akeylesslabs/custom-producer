@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/akeylesslabs/custom-producer/letsencrypt/internal/producer"
-	"github.com/akeylesslabs/custom-producer/letsencrypt/internal/webhook"
+	"github.com/akeylesslabs/custom-producer/go/letsencrypt/internal/producer"
+	"github.com/akeylesslabs/custom-producer/go/letsencrypt/internal/webhook"
 )
 
 func main() {

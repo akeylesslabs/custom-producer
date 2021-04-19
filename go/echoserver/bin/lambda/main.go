@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/akeylesslabs/custom-producer/echoserver/pkg/producer"
+	"github.com/akeylesslabs/custom-producer/go/echoserver/pkg/producer"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )

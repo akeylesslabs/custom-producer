@@ -9,8 +9,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/akeylesslabs/custom-producer/letsencrypt/internal/producer"
-	"github.com/akeylesslabs/custom-producer/pkg/auth"
+	"github.com/akeylesslabs/custom-producer/go/letsencrypt/internal/producer"
+	"github.com/akeylesslabs/custom-producer/go/pkg/auth"
 	"github.com/gorilla/mux"
 )
 

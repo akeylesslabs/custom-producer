@@ -1,4 +1,4 @@
-module github.com/akeylesslabs/custom-producer
+module github.com/akeylesslabs/custom-producer/go
 
 go 1.16
 
