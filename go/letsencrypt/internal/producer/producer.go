@@ -7,6 +7,7 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"fmt"
+	"os"
 
 	"github.com/go-acme/lego/v4/certificate"
 	"github.com/go-acme/lego/v4/lego"
@@ -15,6 +16,7 @@ import (
 )
 
 const dryRynAccessID = "p-custom"
+const envLEEmail = "LE_EMAIL"
 
 // ErrMissingSubClaim is returned when the original user doesn't have an
 // "email" sub-claim in their access credentials.
@@ -63,7 +65,11 @@ func (p *producer) Create(r *CreateRequest) (*CreateResponse, error) {
 	default:
 		emailClaims := r.ClientInfo.SubClaims["email"]
 		if len(emailClaims) == 0 {
-			return nil, ErrMissingSubClaim
+			if envEmail := os.Getenv(envLEEmail); envEmail != "" {
+				email = envEmail
+			} else {
+				return nil, ErrMissingSubClaim
+			}
 		}
 	}
 

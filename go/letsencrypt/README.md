@@ -63,6 +63,11 @@ example, if a single API Gateway manages more than a single custom producer, a
 particular Let's Encrypt producer deployment may be limited to only one of
 them. This name should be the full item name, including the leading `/`.
 
+### `LE_EMAIL`
+
+This is an optional variable to set a default email address to use to access
+Let's Encrypt. It will be used if no "email" sub-claim exists in the request.
+
 ## Usage
 
 This producer accepts the following arguments:
