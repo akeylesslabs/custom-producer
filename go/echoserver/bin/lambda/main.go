@@ -13,6 +13,9 @@ import (
 )
 
 func handleRequest(ctx context.Context, r events.APIGatewayV2HTTPRequest) (interface{}, error) {
+	// NOTE: request body may contain sensitive data, for example, secret
+	// payload specified when the producer was created, or user input that may
+	// also include passwords/tokens. Avoid logging the entire request body.
 	log.Println("new request:", r.RawPath, r.Body)
 
 	p := &producer.Producer{}
