@@ -45,32 +45,26 @@ type producer struct {
 }
 
 func (p *producer) Create(r *CreateRequest) (*CreateResponse, error) {
+	// dry run mode only makes sure that the producer configuration is valid,
+	// not that the implementation is correct, so it's enough to return a valid
+	// response without actually obtaining a certificate
+	if r.ClientInfo.AccessID == dryRynAccessID {
+		return &CreateResponse{}, nil
+	}
+
 	var email string
 
-	// Akeyless sends a "dry-run" request to make sure producer configuration
-	// is valid, but this request doesn't include all the required information;
-	// for example, this request doesn't have sub-claims, so we can't know the
-	// email of the user that initiated the request. In fact, we don't even
-	// know the user, so we use a special dry-run access ID and email.
-	//
-	// In case of Let's Encrypt, it's also important that staging environment
-	// is used to prevent rate-limits in production environment.
-	switch r.ClientInfo.AccessID {
-	case dryRynAccessID:
-		email = p.dryRunEmail
-		r.Input = Input{
-			UseStaging: true,
-			Domain:     p.dryRunDomain,
+	switch emailClaims := r.ClientInfo.SubClaims["email"]; len(emailClaims) {
+	case 0:
+		// if no email sub-claim is set, try using env var
+		envEmail, ok := os.LookupEnv(envLEEmail)
+		if !ok {
+			return nil, ErrMissingSubClaim
 		}
+
+		email = envEmail
 	default:
-		emailClaims := r.ClientInfo.SubClaims["email"]
-		if len(emailClaims) == 0 {
-			if envEmail := os.Getenv(envLEEmail); envEmail != "" {
-				email = envEmail
-			} else {
-				return nil, ErrMissingSubClaim
-			}
-		}
+		email = emailClaims[0]
 	}
 
 	certOut, err := obtainCertificate(email, r.Input)

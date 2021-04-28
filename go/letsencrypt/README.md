@@ -30,19 +30,9 @@ This producer must be configured using the following environment variables:
 ### Dry-run mode
 
 While setting up an integration with this producer, Akeyless performs a
-"dry-run" session to make sure everything is configured properly. The following
-environment variables must be set to support this operation:
-
-#### `LE_DRY_RUN_EMAIL`
-
-This email is used when generating a new certificate. Normally the email is
-taken from an "email" sub-claim of a requesting user, but in case of dry-run,
-no email is available, and a pre-defined email must be used instead.
-
-#### `LE_DRY_RUN_DOMAIN`
-
-A test certificate is issued by Let's Encrypt for this domain name. Normally,
-the requesting user would specify the domain name to issue a certificate for.
+"dry-run" session to make sure everything is configured properly. This mode
+doesn't do anything with Let's Encrypt. Instead, it returns an empty "Success"
+response immediately.
 
 ### Production mode
 
