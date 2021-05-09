@@ -45,6 +45,13 @@ func handleRequest(ctx context.Context, r events.APIGatewayV2HTTPRequest) (inter
 		}
 
 		return p.Revoke(rr)
+	case "/sync/rotate":
+		var rr *producer.RotateRequest
+		if err := json.Unmarshal([]byte(r.Body), &rr); err != nil {
+			return nil, fmt.Errorf("invalid request: %w", err)
+		}
+
+		return p.Rotate(rr)
 	default:
 		return nil, fmt.Errorf("invalid request path '%s'", r.RawPath)
 	}
