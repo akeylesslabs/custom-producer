@@ -32,6 +32,13 @@ func (p *Producer) Revoke(r *RevokeRequest) (*RevokeResponse, error) {
 	}, nil
 }
 
+// Rotate generates and sends back a new payload.
+func (p *Producer) Rotate(r *RotateRequest) (*RotateResponse, error) {
+	return &RotateResponse{
+		Payload: fmt.Sprintf("%d", time.Now().UnixNano()),
+	}, nil
+}
+
 // CreateRequest represents requests to /sync/create endpoint to create
 // temporary credentials.
 type CreateRequest struct {
@@ -83,4 +90,15 @@ type RevokeRequest struct {
 type RevokeResponse struct {
 	Revoked []string `json:"revoked"`
 	Message string   `json:"message,omitempty"`
+}
+
+// RotateRequest represents admin credentials rotation requests made by
+// Akeyless Custom Producer.
+type RotateRequest struct {
+	Payload string `json:"payload"`
+}
+
+// RotateResponse is returned by rotate operation.
+type RotateResponse struct {
+	Payload string `json:"payload"`
 }
