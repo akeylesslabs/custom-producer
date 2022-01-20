@@ -8,6 +8,7 @@ import (
 	"crypto/rand"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/go-acme/lego/v4/certificate"
 	"github.com/go-acme/lego/v4/lego"
@@ -130,7 +131,8 @@ func obtainCertificate(email string, inp Input) (*certOutput, error) {
 		return nil, fmt.Errorf("can't obtain lets encrypt registration for %s: %w", email, err)
 	}
 
-	out, err := client.Certificate.Obtain(certificate.ObtainRequest{Domains: inp.Domain})
+	domainList := strings.Split(inp.Domain, ",")
+	out, err := client.Certificate.Obtain(certificate.ObtainRequest{Domains: domainList})
 	if err != nil {
 		return nil, fmt.Errorf("can't obtain certificates for domain %v: %w", inp.Domain, err)
 	}
