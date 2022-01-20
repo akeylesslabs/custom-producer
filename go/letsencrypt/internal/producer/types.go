@@ -22,8 +22,8 @@ type CreateRequest struct {
 // Input includes variables specific to Let's Encrypt producer. The input
 // should be provided with `get-dynamic-secret-value` operation.
 type Input struct {
-	UseStaging bool   `json:"use_staging"`
-	Domain     string `json:"domain"`
+	UseStaging bool     `json:"use_staging"`
+	Domain     []string `json:"domain"`
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
