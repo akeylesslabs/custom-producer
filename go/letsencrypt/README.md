@@ -64,7 +64,7 @@ This producer accepts the following arguments:
 
 | Field name | Description |
 |-|-|
-| `domain` | Required: Issue Let's Encrypt certificate for this domain. |
+| `domain` | Required: A comma seperated domain list to issue in Let's Encrypt certificate. The first domain is used for the `CommonName` field of the certificate, all other domains are added using the `Subject Alternate Names` extension |
 | `use_staging` | Use Let's Encrypt staging environment. Useful during testing or integration to avoid rate limits. |
 
 For example:
