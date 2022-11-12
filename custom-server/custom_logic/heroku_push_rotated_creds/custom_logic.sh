@@ -3,6 +3,7 @@
 # GW_URL - Akeyless GW URL (Configuration Management port) e.g. https://my-gw.mydomain.com:8000
 # HEROKU_API_KEY - Heroku API Key (required for the API call)
 # APP_ID_OR_NAME - Heroku Application ID or Name to push Config Vars to
+# TOKEN - Akeyless API Token (Used to rotate/get secret value)
 # The Rotated Secret Payload should look like this:
 # { "AWS_KEY_ID": "<reducted>", "AWS_SECRET_KEY": "<reducted>" }
 # For more information, visit https://docs.akeyless.io/docs/create-a-custom-rotated-secret
