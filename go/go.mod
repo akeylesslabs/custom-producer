@@ -7,3 +7,5 @@ require (
 	github.com/go-acme/lego/v4 v4.3.1
 	github.com/gorilla/mux v1.8.0
 )
+
+exclude github.com/labstack/echo/v4 v4.1.11
