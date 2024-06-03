@@ -6,6 +6,7 @@ require (
 	github.com/aws/aws-lambda-go v1.23.0
 	github.com/go-acme/lego/v4 v4.3.1
 	github.com/gorilla/mux v1.8.0
+	golang.org/x/sys v0.20.0 // indirect
 )
 
 exclude github.com/labstack/echo/v4 v4.1.11
