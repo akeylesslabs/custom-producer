@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-server
+  namespace: <INSERT NAMESPACE>
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-server
+  template:
+    metadata:
+      labels:
+        app: custom-server
+    spec:
+      containers:
+        - name: custom-server
+          image: <INSERT IMAGE>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 2608
+              name: http
+          env:
+            - name: GW_ACCESS_ID
+              value: "<INSERT ACCESS-ID>"
+          volumeMounts:
+            - name: custom-logic
+              mountPath: /custom_logic.sh
+              subPath: custom_logic.sh
+              readOnly: true
+      volumes:
+        - name: custom-logic
+          configMap:
+            name: custom-server-logic
+            defaultMode: 0755
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: custom-server
+  namespace: <INSERT NAMESPACE>
+spec:
+  selector:
+    app: custom-server
+  ports:
+    - name: http
+      port: 2608
+      targetPort: 2608
+  type: ClusterIP
