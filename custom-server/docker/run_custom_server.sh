@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_NAME=custom-server
-IMAGE_NAME=akeyless/custom-server
+IMAGE_NAME=akeyless/custom-server:alpine-latest
 
 GW_ACCESS_ID="" # Your Gateway's Admin Access ID
 
