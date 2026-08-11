@@ -61,11 +61,29 @@ kubectl apply -f deployment.yaml
 
 ### 4. Register the custom producer in Akeyless
 
-Point the custom producer/rotator webhook at the Service's in-cluster DNS:
+Point the webhook(s) at the Service's in-cluster DNS, base URL:
 
 ```
 http://custom-server.<NAMESPACE>.svc.cluster.local:2608
 ```
+
+**For a Custom Rotated Secret**, the web-target should be:
+
+```
+http://custom-server.<NAMESPACE>.svc.cluster.local:2608/sync/rotate
+```
+
+**For a Custom Dynamic Secret**, set:
+
+| Webhook | URL |
+|---------|-----|
+| Create | `http://custom-server.<NAMESPACE>.svc.cluster.local:2608/sync/create` |
+| Revoke | `http://custom-server.<NAMESPACE>.svc.cluster.local:2608/sync/revoke` |
+
+To also rotate the power user's credentials, enable rotation and set:
+
+- **Rotation period (days)** — number of days between auto-rotations
+- **Rotate Webhook URL** — `http://custom-server.<NAMESPACE>.svc.cluster.local:2608/sync/rotate`
 
 ## Manifest overview
 
