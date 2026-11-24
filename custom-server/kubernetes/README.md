@@ -71,12 +71,13 @@ To enable automatic rotation of the power user's credentials for a Custom Dynami
 Run the following commands from the directory containing the updated `custom_logic.sh`. Replace `your-namespace` with the namespace from step 1.
 
 ```bash
-kubectl -n your-namespace create configmap custom-server-logic \
-  --from-file=custom_logic.sh=./custom_logic.sh \
-  --dry-run=client -o yaml | kubectl -n your-namespace apply -f -
-
-kubectl -n your-namespace rollout restart deployment/custom-server
-kubectl -n your-namespace rollout status deployment/custom-server --timeout=120s
+(
+  set -o pipefail
+  kubectl -n your-namespace create configmap custom-server-logic \
+    --from-file=custom_logic.sh=./custom_logic.sh \
+    --dry-run=client -o yaml | kubectl -n your-namespace apply -f -
+) && kubectl -n your-namespace rollout restart deployment/custom-server \
+  && kubectl -n your-namespace rollout status deployment/custom-server --timeout=120s
 ```
 
 The Deployment mounts `custom_logic.sh` at `/custom_logic.sh` as a read-only file with mode `0755`. Because the mount uses `subPath`, existing pods need to be replaced to pick up changes to the file.

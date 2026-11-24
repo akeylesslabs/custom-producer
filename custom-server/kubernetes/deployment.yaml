@@ -13,6 +13,8 @@ spec:
       labels:
         app: custom-server
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       containers:
         - name: custom-server
           image: akeyless/custom-server:alpine-latest

@@ -29,10 +29,11 @@ See [`custom_logic/`](./custom_logic/) for ready-to-use examples:
 
 ### Docker
 
-```bash
-# Set your Gateway's Admin Access ID
-export GW_ACCESS_ID="p-xxxx"
+1. Edit `docker/run_custom_server.sh` and set `GW_ACCESS_ID` to your Gateway Admin Access ID.
+2. Place your `custom_logic.sh` in this directory (`custom-server/`).
+3. From `custom-server/`, run:
 
+```bash
 bash docker/run_custom_server.sh
 ```
 
