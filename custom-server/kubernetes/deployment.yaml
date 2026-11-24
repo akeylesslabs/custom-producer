@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: custom-server
-          image: <INSERT IMAGE>
+          image: akeyless/custom-server:alpine-latest
           imagePullPolicy: Always
           ports:
             - containerPort: 2608
