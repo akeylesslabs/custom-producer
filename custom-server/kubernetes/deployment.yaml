@@ -17,6 +17,14 @@ spec:
         - name: custom-server
           image: akeyless/custom-server:alpine-latest
           imagePullPolicy: Always
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
           ports:
             - containerPort: 2608
               name: http
