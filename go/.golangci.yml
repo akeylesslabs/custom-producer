@@ -1,11 +1,13 @@
+version: "2"
 linters:
   enable:
     - bodyclose
-    - exportloopref
     - errorlint
-    - gofmt
     - govet
     - ineffassign
     - nilerr
     - noctx
     - wastedassign
+formatters:
+  enable:
+    - gofmt
