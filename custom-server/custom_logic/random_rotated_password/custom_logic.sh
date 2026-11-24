@@ -2,7 +2,7 @@
 # { "username": "my-user", "password": "currentPassword" }
 # For more information, visit https://docs.akeyless.io/docs/create-a-custom-rotated-secret
 
-function run_rotate() {
+run_rotate() {
     PAYLOAD=$(echo "$*" | base64 -d)
     PAYLOAD_VALUE=$(echo "$PAYLOAD" | jq -r .payload)
     RANDOM_ALNUM=$(dd bs=1000 count=1 if=/dev/urandom status=none | tr -dc '[:alnum:]' | head -c 15)

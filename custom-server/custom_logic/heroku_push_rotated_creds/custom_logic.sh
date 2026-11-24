@@ -8,7 +8,7 @@
 # { "AWS_KEY_ID": "<reducted>", "AWS_SECRET_KEY": "<reducted>" }
 # For more information, visit https://docs.akeyless.io/docs/create-a-custom-rotated-secret
 
-function run_rotate() {
+run_rotate() {
     PAYLOAD=$(echo "$*" | base64 -d)
     PAYLOAD_VALUE=$(echo "$PAYLOAD" | jq -r .payload)
     akeyless gateway-rotate-secret -n "$ROTATED_SECRET_NAME" --gateway-url ${GW_URL} --token ${TOKEN} >> /dev/null

@@ -5,7 +5,7 @@
 # USER_ROLE - The Splunk role to add the user to, e.g. user
 # For more information, visit https://docs.akeyless.io/docs/custom-producer
 
-function run_create() {
+run_create() {
     PAYLOAD=$(echo "$*" | base64 -d)
     PAYLOAD_VALUE=$(echo "$PAYLOAD" | jq -r .)
 
@@ -15,7 +15,7 @@ function run_create() {
     echo "{ \"id\": \"${NEW_USER}\", \"response\": {\"username\":\"${NEW_USER}\", \"password\":\"${NEW_PASS}\"} }"
 }
 
-function run_revoke() {
+run_revoke() {
     PAYLOAD=$(echo "$*" | base64 -d)
     PAYLOAD_VALUE=$(echo "$PAYLOAD" | jq -r .)
 
